@@ -16,7 +16,6 @@ for (const elfCalorieGroup of elfCalorieGroups) {
 }
 
 totalCalories.sort((a, b) => b - a);
-console.log(totalCalories);
 const totalCaloriesTopThreeElves =
   totalCalories[0] + totalCalories[1] + totalCalories[2];
 const maxTotalCalories = totalCalories[0];

@@ -15,5 +15,7 @@ Execute the Typescript build in Visual Studio Code by executing **Run Build Task
 Run the JS file with NodeJS:
 
 ```bash
-node day1.js
+% node day1.js
+maxTotalCalories 69693
+totalCaloriesTopThreeElves 200945
 ```
