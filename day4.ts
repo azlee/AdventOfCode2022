@@ -22,8 +22,7 @@ function isOverlap(start1: number, end1: number, start2: number, end2: number) {
 function getOverlap() {
   const input = fs.readFileSync("day4input.txt", "utf8");
   const pairs = input.split("\n");
-  let numOverlap = 0;
-  for (const pair of pairs) {
+  return pairs.reduce((num, pair) => {
     const [section1, section2] = pair.split(",");
     const [start1, end1] = section1.split("-");
     const [start2, end2] = section2.split("-");
@@ -35,17 +34,16 @@ function getOverlap() {
         parseInt(end2)
       )
     ) {
-      numOverlap++;
+      num++;
     }
-  }
-  return numOverlap;
+    return num;
+  }, 0);
 }
 
 function getOverlap2() {
   const input = fs.readFileSync("day4input.txt", "utf8");
   const pairs = input.split("\n");
-  let numOverlap = 0;
-  for (const pair of pairs) {
+  return pairs.reduce((num, pair) => {
     const [section1, section2] = pair.split(",");
     const [start1, end1] = section1.split("-");
     const [start2, end2] = section2.split("-");
@@ -57,10 +55,10 @@ function getOverlap2() {
         parseInt(end2)
       )
     ) {
-      numOverlap++;
+      num++;
     }
-  }
-  return numOverlap;
+    return num;
+  }, 0);
 }
 
 console.log(getOverlap());
