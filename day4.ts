@@ -24,16 +24,9 @@ function getOverlap() {
   const pairs = input.split("\n");
   return pairs.reduce((num, pair) => {
     const [section1, section2] = pair.split(",");
-    const [start1, end1] = section1.split("-");
-    const [start2, end2] = section2.split("-");
-    if (
-      isContained(
-        parseInt(start1),
-        parseInt(end1),
-        parseInt(start2),
-        parseInt(end2)
-      )
-    ) {
+    const [start1, end1] = section1.split("-").map((x) => parseInt(x));
+    const [start2, end2] = section2.split("-").map((x) => parseInt(x));
+    if (isContained(start1, end1, start2, end2)) {
       num++;
     }
     return num;
@@ -45,16 +38,9 @@ function getOverlap2() {
   const pairs = input.split("\n");
   return pairs.reduce((num, pair) => {
     const [section1, section2] = pair.split(",");
-    const [start1, end1] = section1.split("-");
-    const [start2, end2] = section2.split("-");
-    if (
-      isOverlap(
-        parseInt(start1),
-        parseInt(end1),
-        parseInt(start2),
-        parseInt(end2)
-      )
-    ) {
+    const [start1, end1] = section1.split("-").map((x) => parseInt(x));
+    const [start2, end2] = section2.split("-").map((x) => parseInt(x));
+    if (isOverlap(start1, end1, start2, end2)) {
       num++;
     }
     return num;
