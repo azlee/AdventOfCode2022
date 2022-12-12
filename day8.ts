@@ -1,7 +1,6 @@
 // https://adventofcode.com/2022/day/8
 
 import * as fs from "fs";
-require("util");
 
 function parseGrid(input: string): number[][] {
   const lines = input.split("\n");
