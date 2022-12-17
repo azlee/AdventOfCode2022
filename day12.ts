@@ -5,7 +5,6 @@ import * as fs from "fs";
 interface StepsPosition {
   steps: number;
   position: number[];
-  path: string;
 }
 
 function parseInput(lines: string[]): string[][] {
@@ -17,35 +16,37 @@ function parseInput(lines: string[]): string[][] {
   return output;
 }
 
-function findStart(grid: string[][]): number[] {
-  let start = [0, 0];
+function findStarts(grid: string[][], findA: boolean): number[][] {
+  let starts = [];
   for (let i = 0; i < grid.length; i++) {
     for (let j = 0; j < grid[0].length; j++) {
       if (grid[i][j] === "S") {
-        start = [i, j];
-        break;
+        starts.push([i, j]);
+      }
+      if (findA && grid[i][j] === "a") {
+        starts.push([i, j]);
       }
     }
   }
-  return start;
+  return starts;
 }
 
-function bfs(grid: string[][]): number {
+function bfs(grid: string[][], startingPositions: number[][]): number {
   const visited = new Set<string>(); // stringified coordinates
   const queue: StepsPosition[] = [];
-  queue.push({
-    position: findStart(grid),
-    steps: 0,
-    path: "",
-  });
+  for (let position of startingPositions) {
+    queue.push({
+      position,
+      steps: 0,
+    });
+  }
   let fewestSteps = Number.MAX_SAFE_INTEGER;
   while (queue.length) {
-    const { position, steps, path } = queue.shift();
+    const { position, steps } = queue.shift();
     const row = position[0];
     const col = position[1];
     const height = grid[row][col];
     if (height === "E") {
-      console.log("position", position, steps, path);
       fewestSteps = Math.min(fewestSteps, steps);
     }
     // check adjacent
@@ -80,7 +81,6 @@ function bfs(grid: string[][]): number {
           queue.push({
             position: [newRow, newCol],
             steps: steps + 1,
-            path: path + "," + adjHeight,
           });
         }
       }
@@ -93,8 +93,17 @@ function getFewestSteps() {
   const input = fs.readFileSync("day12input.txt", "utf8");
   const lines = input.split("\n");
   const grid = parseInput(lines);
-  const fewestSteps = bfs(grid);
+  const fewestSteps = bfs(grid, findStarts(grid, false));
+  return fewestSteps;
+}
+
+function getFewestStepsPart2() {
+  const input = fs.readFileSync("day12input.txt", "utf8");
+  const lines = input.split("\n");
+  const grid = parseInput(lines);
+  const fewestSteps = bfs(grid, findStarts(grid, true));
   return fewestSteps;
 }
 
 console.log("Part 1: ", getFewestSteps());
+console.log("Part 2: ", getFewestStepsPart2());
