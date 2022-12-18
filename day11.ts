@@ -1,4 +1,4 @@
-// https://adventofcode.com/2022/day/10
+// https://adventofcode.com/2022/day/11
 
 import * as fs from "fs";
 
