@@ -73,6 +73,10 @@ function processMonkey(
     falseMonkey,
     divisibleTest,
   } = monkey;
+  const superModulo = monkeys.reduce(
+    (prev, monkey) => monkey.divisibleTest * prev,
+    1
+  );
   for (let itemNum = 0; itemNum < items.length; itemNum++) {
     let worryLevel = items[itemNum];
     if (operation === "+") {
@@ -83,7 +87,7 @@ function processMonkey(
         typeof operationNum === "number" ? operationNum : worryLevel;
     }
     if (divideByThree) {
-      worryLevel = Math.floor(worryLevel / 3);
+      worryLevel = worryLevel % superModulo;
     }
     monkey.numInspected++;
     if (worryLevel % divisibleTest === 0) {
@@ -121,4 +125,4 @@ function getLevelOfMonkeyBusiness(
 }
 
 console.log("Part 1: ", getLevelOfMonkeyBusiness(20, true));
-// console.log("Part 2: ", getLevelOfMonkeyBusiness(10000, true));
+console.log("Part 2: ", getLevelOfMonkeyBusiness(10000, true));
